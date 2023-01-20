@@ -5,53 +5,55 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-.center{
-  text-align: center; 
-}
-.centerdiv{
-   position: absolute ;
-   top : 50% ; 
-   left: 50% ;
-   transform : translate(-50% , -50%) ; 
-}
-.centerdivflex{
-  display : flex ; 
-  align-items: center ;
-  justify-content : center;
-}
 
-.centerdivgrid{
-  display : grid ; 
-  place-items: center ;
+  display: flex; 
+  align-items : center ; 
+  justify-content : center ; 
 }
 
 .Title{
- color : #68BBE3;  /* rgb(255, 95, 95) ;  */
-  border-bottom: 2px ;
-  padding-bottom: 10px ;
-  border-color : blueviolet ;
-}
-.SudokuTable{
-  /* text-align: center; */
-  background-color: #055C9D;
-  border-radius : 5px; 
-  border-style: solid;
-  border-width: 2px;
+  padding-top: 2rem;
+  font-size : 2.5rem; 
+  font-weight: bold ;
+  text-align : center ; 
+  color : #68BBE3;  /* rgb(255, 95, 95) ;  */
+  padding-bottom: 1rem ;
 }
 
-.SudokuBox{
-  background-color: #055C9D;
-  border-radius : 5px; 
+.SudokuTable{
+  display : flex ; 
+  flex-direction: column;
+}
+
+.SudokuRow{
+  display: inline-flex ; 
 }
 
 .SudokuCell{
-  height : 30px ; 
-  width: 30px ;
-  box-sizing: border-box;
-  text-align: center;
-  color : #68BBE3;
-  background-color: rgb(57, 57, 53);
-  border-color :#055C9D;
-  border-radius : 4px; 
+  height : 3.5rem ; 
+  width: 3.5rem ;
+  font-size : 1.6rem ;
+  font-weight : bold ;
+  align-items: center;
+  justify-content: center;
+  /* color : #68BBE3; for dark mode */
+  color : rgb(213, 245, 255);  
+  /* background-color: rgb(57, 57, 53);  for dark mode*/
+  background-color: #68BBE3;
+  border-color :#055C9D ;
+}
+
+.SudokuCell:nth-child(3n){
+  border-right-width: 0.3rem;
+  border-right-color: rgb(95, 144, 240);
+}
+
+.SudokuRow:nth-child(3n-1) > .SudokuCell:nth-child(n){ 
+  border-top-width: 0.4rem;
+  border-top-color: rgb(95, 144, 240);
+}
+
+.SudokuCell:hover { 
+  background-color: #68BBE3 !important;
+  color:#055C9D !important ; 
 }
