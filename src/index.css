@@ -37,23 +37,76 @@ body {
   align-items: center;
   justify-content: center;
   /* color : #68BBE3; for dark mode */
-  color : rgb(213, 245, 255);  
+  color : rgb(255, 245, 251);  
   /* background-color: rgb(57, 57, 53);  for dark mode*/
   background-color: #68BBE3;
-  border-color :#055C9D ;
+  border : solid #1e4a6b 0.02rem;
 }
 
 .SudokuCell:nth-child(3n){
-  border-right-width: 0.3rem;
-  border-right-color: rgb(95, 144, 240);
+  border-right-width: 0.25rem;
+  border-right-color: rgb(48, 100, 177);
 }
 
 .SudokuRow:nth-child(3n-1) > .SudokuCell:nth-child(n){ 
-  border-top-width: 0.4rem;
-  border-top-color: rgb(95, 144, 240);
+  border-top-width: 0.25rem;
+  border-top-color:  rgb(42, 65, 110);
 }
 
 .SudokuCell:hover { 
   background-color: #68BBE3 !important;
   color:#055C9D !important ; 
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .SudokuCell{
+    width: 2.5rem ;
+    height: 2.5rem ;
+  }
+
+  .SudokuCell:nth-child(3n){
+    border-right-width: 0.2rem;
+    border-right-color: rgb(48, 100, 177);
+  }
+  
+  .SudokuRow:nth-child(3n-1) > .SudokuCell:nth-child(n){ 
+    border-top-width: 0.25rem;
+    border-top-color: rgb(42, 65, 110);
+  }
+
+  
+}
+
+@media screen and (orientation:landscape)
+and (min-height: 100px) 
+and (max-height: 400px) {
+    body{
+      margin-left : 3rem;
+      justify-content: left;
+    }
+
+    .Title{
+      font-size : 1.8rem;
+      padding-top : 1.5rem;
+      padding-bottom: 0.7rem;
+    }
+
+    .SudokuCell{
+      width: 1.5rem ;
+      height: 1.5rem ;
+      font-size: 1rem;
+    }
+  
+    .SudokuCell:nth-child(3n){
+      border-right-width: 0.2rem;
+      border-right-color: rgb(48, 100, 177);
+    }
+    
+    .SudokuRow:nth-child(3n-1) > .SudokuCell:nth-child(n){ 
+      border-top-width: 0.2rem;
+      border-top-color: rgb(42, 65, 110);
+    }
+  
 }
