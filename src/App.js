@@ -23,24 +23,17 @@ function App() {
   let CurrIdNumber = 0;
   let selected = "NONE";
 
-  function select(selected, ele) {
-    let defaultcolor = "blue";
-    console.log("this is selected : ");
-    console.log(ele);
-    console.log(selected);
-    console.log(ele.target.id);
+  let select = function (e) {
+    let defaultcolor = "#68BBE3";
     util.changeBGColor(selected, defaultcolor);
-    let newcolor = "#f34";
-    selected = ele.target.id;
-    console.log(selected);
+    let newcolor = "#1c3447";
+    selected = e.target.id;
     util.changeBGColor(selected, newcolor);
-
-    console.log(selected);
-  }
+  };
 
   function giveNextId() {
     let nextId = "cell";
-    console.log(CurrIdNumber);
+    // console.log(CurrIdNumber);
     nextId = nextId + CurrIdNumber;
     CurrIdNumber += 1;
     return nextId;
@@ -48,11 +41,7 @@ function App() {
 
   document.onkeydown = function (e) {
     console.log("key down");
-    console.log(e);
-    console.log(e.key);
-    console.log(selected);
     let targetId = e.target.id;
-    if (util.isValidId(targetId)) console.log("Valid");
     if (
       util.isnumber(e.key) &&
       util.isValidId(targetId) &&
@@ -76,14 +65,19 @@ function App() {
 
   let SudokuBoard = row.map((x) => {
     let SudokuRow = row.map((y) => {
-      return <Cell className="SudokuCell" id={giveNextId()}></Cell>;
+      return (
+        <button
+          className="SudokuCell"
+          id={giveNextId()}
+          onClick={(selected) => select(selected)}></button>
+      );
     });
     return <div className="SudokuRow">{SudokuRow}</div>;
   });
 
   return (
     <div className="SudokuTable">
-      <div class="Title">Sudoku</div>
+      <div className="Title">Sudoku</div>
       {SudokuBoard}
     </div>
   );

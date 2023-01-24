@@ -13,16 +13,10 @@ export function changeBGColor(elementId, color) {
 export function select(selected, ele) {
   let defaultcolor = "blue";
   console.log("this is selected : ");
-  console.log(ele);
-  console.log(selected);
-  console.log(ele.target.id);
   changeBGColor(selected, defaultcolor);
   let newcolor = "#f34";
   selected = ele.target.id;
-  console.log(selected);
   changeBGColor(selected, newcolor);
-
-  console.log(selected);
 }
 
 export function changeText(newtext, selected) {

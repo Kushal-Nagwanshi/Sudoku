@@ -4,7 +4,7 @@
 function Cell(props) {
   return (
     <>
-      <button className={props.className} id={props.id}>
+      <button className={props.className} id={props.id} onClick={props.onClick}>
         {props.content}
       </button>
     </>

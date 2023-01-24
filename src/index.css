@@ -54,8 +54,8 @@ body {
 }
 
 .SudokuCell:hover { 
-  background-color: #68BBE3 !important;
-  color:#055C9D !important ; 
+  background-color: #9dd8f5 !important ;
+  color:#1c3447 !important ; 
 }
 
 @media only screen and (max-width: 768px) {
@@ -81,7 +81,7 @@ body {
 
 @media screen and (orientation:landscape)
 and (min-height: 100px) 
-and (max-height: 400px) {
+and (max-height: 560px) {
     body{
       margin-left : 3rem;
       justify-content: left;
