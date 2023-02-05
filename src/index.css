@@ -9,15 +9,18 @@ body {
   display: flex; 
   align-items : center ; 
   justify-content : center ; 
+  background-image: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
 }
 
 .Title{
   padding-top: 2rem;
-  font-size : 2.5rem; 
+  font-size : 3rem; 
   font-weight: bold ;
   text-align : center ; 
-  color : #68BBE3;  /* rgb(255, 95, 95) ;  */
+  color : #ffffff;  /* rgb(255, 95, 95) ;  */
   padding-bottom: 1rem ;
+  -webkit-text-stroke: 0.1rem rgb(94, 138, 127); 
+
 }
 
 .SudokuTable{
@@ -37,20 +40,28 @@ body {
   align-items: center;
   justify-content: center;
   /* color : #68BBE3; for dark mode */
-  color : rgb(255, 245, 251);  
+  /* color : rgb(255, 245, 251);   */
   /* background-color: rgb(57, 57, 53);  for dark mode*/
   background-color: #68BBE3;
   border : solid #1e4a6b 0.02rem;
 }
 
+.Changeable{
+  color :rgb(255, 245, 251) ;
+}
+
+.nonChangeable{
+  color : rgb(51, 42, 84) ;
+}
+
 .SudokuCell:nth-child(3n){
   border-right-width: 0.25rem;
-  border-right-color: rgb(48, 100, 177);
+  border-right-color: rgb(11, 61, 141);
 }
 
 .SudokuRow:nth-child(3n-1) > .SudokuCell:nth-child(n){ 
   border-top-width: 0.25rem;
-  border-top-color:  rgb(42, 65, 110);
+  border-top-color:  rgb(46, 79, 131);
 }
 
 .SudokuCell:hover { 
@@ -60,6 +71,11 @@ body {
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
+  .Title{
+    font-size : 2.3rem;
+    padding-top : 2rem;
+    padding-bottom: 1rem;
+  }
 
   .SudokuCell{
     width: 2.5rem ;
@@ -89,7 +105,7 @@ and (max-height: 560px) {
 
     .Title{
       font-size : 1.8rem;
-      padding-top : 1.5rem;
+      padding-top : 0.5rem;
       padding-bottom: 0.7rem;
     }
 

@@ -1,11 +1,16 @@
 import * as util from "./utility";
-import Cell from "./Cell";
 
-let Changeable = [];
-
-for (let i = 0; i < 81; i++) {
-  Changeable.push(true);
-}
+let Sudoku = [
+  [8, 6, 0, 0, 2, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 5, 9],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 6, 0, 8, 0, 0],
+  [0, 4, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 5, 3, 0, 0, 0, 0, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 2, 0, 0, 0, 0, 6, 0, 0],
+  [0, 0, 7, 5, 0, 9, 0, 0, 0],
+];
 
 function isChangeable(id) {
   let idnumber = 0;
@@ -14,8 +19,11 @@ function isChangeable(id) {
       idnumber = idnumber * 10 + Number(id[i]);
     }
   }
-  console.log(idnumber);
-  if (Changeable[idnumber]) return true;
+  let x = Math.floor(idnumber / 9);
+  let y = idnumber % 9;
+  // console.log(x, y);
+  // console.log(idnumber);
+  if (Sudoku[x][y] === 0) return true;
   return false;
 }
 
@@ -58,18 +66,22 @@ function App() {
   // for (let i = 0; i < 9; i++) {
   //   Sudoku.push(row);
   // }
-  let row = [];
-  for (let i = 0; i < 9; i++) {
-    row.push(i);
-  }
+
+  let row = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   let SudokuBoard = row.map((x) => {
     let SudokuRow = row.map((y) => {
+      let this_id = giveNextId();
+      let this_class = "SudokuCell";
+      if (!isChangeable(this_id)) this_class += " nonChangeable";
+      else this_class += " Changeable";
       return (
         <button
-          className="SudokuCell"
-          id={giveNextId()}
-          onClick={(selected) => select(selected)}></button>
+          className={this_class}
+          id={this_id}
+          onClick={isChangeable(this_id) ? (selected) => select(selected) : ""}>
+          {Sudoku[x][y] !== 0 ? Sudoku[x][y] : ""}
+        </button>
       );
     });
     return <div className="SudokuRow">{SudokuRow}</div>;
