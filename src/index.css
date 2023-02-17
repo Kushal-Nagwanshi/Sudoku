@@ -20,7 +20,7 @@ body {
   color : #ffffff;  /* rgb(255, 95, 95) ;  */
   padding-bottom: 1rem ;
   -webkit-text-stroke: 0.1rem rgb(94, 138, 127); 
-
+  user-select : none ;
 }
 
 .SudokuTable{
@@ -44,6 +44,7 @@ body {
   /* background-color: rgb(57, 57, 53);  for dark mode*/
   background-color: #68BBE3;
   border : solid #1e4a6b 0.02rem;
+  user-select: none;
 }
 
 .Changeable{
@@ -64,10 +65,6 @@ body {
   border-top-color:  rgb(46, 79, 131);
 }
 
-.SudokuCell:hover { 
-  background-color: #9dd8f5 !important ;
-  color:#1c3447 !important ; 
-}
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
