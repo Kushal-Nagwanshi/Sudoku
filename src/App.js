@@ -1,6 +1,6 @@
 import * as util from "./utility";
 import axios from "axios";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 
 function App() {
   let blank_board = [
@@ -14,9 +14,22 @@ function App() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
+  let initial_isChangeable = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  ];
 
   const [SudokuBoard, setSudokuBoard] = useState(blank_board);
-  const [changeable, setchangeable] = useState(blank_board);
+  const [changeable, setchangeable] = useState(initial_isChangeable);
+  const selected = useRef("NONE");
+
   useEffect(() => {
     (() => {
       axios.get("http://localhost:4000/sudoku_board").then((res) => {
@@ -35,21 +48,30 @@ function App() {
   }, []);
 
   let CurrIdNumber = 0;
-  let selected = "NONE";
+  function giveNextId() {
+    let nextId = "cell";
+    // console.log(CurrIdNumber);
+    nextId = nextId + CurrIdNumber;
+    CurrIdNumber += 1;
+    return nextId;
+  }
+
   let select = function (e) {
     e.preventDefault();
     let defaultcolor = "#68BBE3";
-    util.changeBGColor(selected, defaultcolor);
+    console.log(selected.current);
+    if (selected.current !== "NONE")
+      util.changeBGColor(selected.current, defaultcolor);
     let newcolor = "#91c7f2"; // what background color you want after a cell is selected.
-    selected = e.target.id;
-    util.changeBGColor(selected, newcolor);
+    selected.current = e.target.id;
+    util.changeBGColor(selected.current, newcolor);
   };
 
   let SudokuBoardDisplay = SudokuBoard.map((row, idx) => {
     let SudokuRow = row.map((cell) => {
       let this_id = giveNextId();
       let this_class = "SudokuCell";
-      if (cell === 0) this_class += " nonChangeable";
+      if (!isChangeable(this_id)) this_class += " nonChangeable";
       else this_class += " Changeable";
       return (
         <button
@@ -58,7 +80,7 @@ function App() {
           key={this_id}
           onClick={isChangeable(this_id) ? select : () => {}}
           onKeyDown={isChangeable(this_id) ? handleOnKeyDown : () => {}}>
-          {!isChangeable(this_id) ? cell : ""}
+          {!isChangeable(this_id) ? cell : " "}
         </button>
       );
     });
@@ -80,20 +102,12 @@ function App() {
   }
 
   function isChangeable(id) {
-    console.log("changeable function");
+    // console.log("changeable function");
     let idnumber = extractID(id);
     let x = Math.floor(idnumber / 9);
     let y = idnumber % 9;
     if (changeable[x][y] === true) return true;
     return false;
-  }
-
-  function giveNextId() {
-    let nextId = "cell";
-    // console.log(CurrIdNumber);
-    nextId = nextId + CurrIdNumber;
-    CurrIdNumber += 1;
-    return nextId;
   }
 
   function handleOnKeyDown(e) {
@@ -110,14 +124,15 @@ function App() {
       (() => {
         let x = Math.floor(idnumber / 9),
           y = Math.floor(idnumber % 9);
-        SudokuBoard[x][y] = Number(e.key);
-        setSudokuBoard(SudokuBoard);
+        let num = Number(e.key);
+        setSudokuBoard((SudokuBoard) =>
+          SudokuBoard.map((row, i) =>
+            i === x ? row.map((el, j) => (j === y ? num : el)) : row
+          )
+        );
       })();
     }
   }
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   return (
     <div className="SudokuTable">
